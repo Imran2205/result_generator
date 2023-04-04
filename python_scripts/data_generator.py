@@ -309,7 +309,7 @@ for vid_count in range(1, last_video):
             "Similarity (Lavis-VQA-based)": lavis_feature,
             "Lavis VQA cosine similarity": lavis_feature_cos,
             'resnet-50 feature similarity': out_resnet_50,
-            'Similarity (Feature-Based)': out_resnet_152,
+            'Similarity (Feature-based)': out_resnet_152,
             'alexnet feature similarity': out_alex,
             'vgg16-bn feature similarity': out_vgg16_bn,
             'Similarity (Pixel-level)': out_ssim
