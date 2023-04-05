@@ -169,11 +169,11 @@ for vid_count in range(start_video, last_video):
         df_gt.dropna(how='all', axis=0, inplace=True)
         df_gt_columns = df_gt.columns[1:]
 
-        df_measure_slice = df_measure.loc[(df_measure['video'] == vid_count) & (df_measure['segment'] == segment)]
-        out_feat_measure = list(df_measure_slice['similarity-score'])
-
-        if vid_count == 10 and segment == 1:
-            out_feat_measure = out_feat_measure[51:70]
+        # df_measure_slice = df_measure.loc[(df_measure['video'] == vid_count) & (df_measure['segment'] == segment)]
+        # out_feat_measure = list(df_measure_slice['similarity-score'])
+        #
+        # if vid_count == 10 and segment == 1:
+        #     out_feat_measure = out_feat_measure[51:70]
 
         for col_no in tqdm(range(len(df_gt_columns) - 1)):
             f_1_vqa = list(df_gt[df_gt_columns[col_no]])
@@ -314,7 +314,6 @@ for vid_count in range(start_video, last_video):
                 'Similarity (Human)': gt_feat,
                 'gt cosine similarity': gt_feat_cos,
                 'Similarity (VQA-based)': out_feat,
-                'GPV VQA similarity (old)': out_feat_measure,
                 'GPV VQA cosine similarity': out_feat_cos,
                 "Similarity (Lavis-VQA-based)": lavis_feature,
                 "Lavis VQA cosine similarity": lavis_feature_cos,
@@ -330,7 +329,6 @@ for vid_count in range(start_video, last_video):
                 'Similarity (Human)': gt_feat,
                 'gt cosine similarity': gt_feat_cos,
                 'Similarity (VQA-based)': out_feat,
-                'GPV VQA similarity (old)': out_feat_measure,
                 'GPV VQA cosine similarity': out_feat_cos,
                 "Similarity (Lavis-VQA-based)": lavis_feature,
                 "Lavis VQA cosine similarity": lavis_feature_cos,
