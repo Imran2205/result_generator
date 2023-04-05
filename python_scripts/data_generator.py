@@ -123,6 +123,10 @@ for vid_count in range(start_video, last_video):
         tester = f"os.path.exists({val})"
 
         images = [eval(val) for x in range(tn) if eval(tester)]
+
+        if vid_count == 10 and segment == 1:
+            images = images[52:72]
+
         out_resnet_50 = []
         out_resnet_152 = []
         out_alex = []
@@ -291,14 +295,6 @@ for vid_count in range(start_video, last_video):
         if vid_count not in final_dict.keys():
             final_dict[vid_count] = {}
 
-        if vid_count == 10 and segment == 1:
-            out_resnet_50 = out_resnet_50[51:70]
-            out_resnet_152 = out_resnet_152[51:70]
-            out_alex = out_alex[51:70]
-            out_vgg16_bn = out_vgg16_bn[51:70]
-            out_ssim = out_ssim[51:70]
-            out_feat_measure = out_feat_measure[51:70]
-
         try:
             assert len(out_feat) == len(out_ssim)
             assert len(gt_feat_cos) == len(out_ssim)
@@ -311,7 +307,7 @@ for vid_count in range(start_video, last_video):
 
         if vid_count == 10 and segment == 1:
             final_dict[vid_count][segment] = {
-                'frame pair': [f'frame-({f - 1}, {f})' for f in range(52, 52 + len(out_feat))],
+                'frame pair': [f'frame-({f - 1}, {f})' for f in range(53, 53 + len(out_feat) + 1)],
                 'Similarity (Human)': gt_feat,
                 'gt cosine similarity': gt_feat_cos,
                 'Similarity (VQA-based)': out_feat,
