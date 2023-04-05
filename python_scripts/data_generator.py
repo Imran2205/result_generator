@@ -291,6 +291,13 @@ for vid_count in range(start_video, last_video):
         if vid_count not in final_dict.keys():
             final_dict[vid_count] = {}
 
+        if vid_count == 10 and segment == 1:
+            out_resnet_50 = out_resnet_50[52:72]
+            out_resnet_152 = out_resnet_152[52:72]
+            out_alex = out_alex[52:72]
+            out_vgg16_bn = out_vgg16_bn[52:72]
+            out_ssim = out_ssim[52:72]
+
         try:
             assert len(out_feat) == len(out_ssim)
             assert len(gt_feat_cos) == len(out_ssim)
