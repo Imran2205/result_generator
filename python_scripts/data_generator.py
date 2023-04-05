@@ -292,11 +292,11 @@ for vid_count in range(start_video, last_video):
             final_dict[vid_count] = {}
 
         if vid_count == 10 and segment == 1:
-            out_resnet_50 = out_resnet_50[52:72]
-            out_resnet_152 = out_resnet_152[52:72]
-            out_alex = out_alex[52:72]
-            out_vgg16_bn = out_vgg16_bn[52:72]
-            out_ssim = out_ssim[52:72]
+            out_resnet_50 = out_resnet_50[51:70]
+            out_resnet_152 = out_resnet_152[51:70]
+            out_alex = out_alex[51:70]
+            out_vgg16_bn = out_vgg16_bn[51:70]
+            out_ssim = out_ssim[51:70]
 
         try:
             assert len(out_feat) == len(out_ssim)
