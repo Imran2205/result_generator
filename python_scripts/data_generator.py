@@ -140,6 +140,14 @@ for vid_count in range(start_video, last_video):
         lavis_feature = []
         lavis_feature_cos = []
 
+        gt_file = os.path.join(
+            gt_folder,
+            f"video_{vid_count}_segment_{segment}.csv"
+        )
+
+        if not os.path.exists(gt_file):
+            continue
+
         csv_file = os.path.join(
             csv_folder,
             f"video-{vid_count}-segment-{segment}.csv"
@@ -155,14 +163,6 @@ for vid_count in range(start_video, last_video):
 
         df_lavis = pd.read_csv(lavis_file)
         df_lavis_column = df_lavis.columns[1:]
-
-        gt_file = os.path.join(
-            gt_folder,
-            f"video_{vid_count}_segment_{segment}.csv"
-        )
-
-        if not os.path.exists(gt_file):
-            continue
 
         df_gt = pd.read_csv(gt_file)
         df_gt.dropna(how='all', axis=1, inplace=True)
