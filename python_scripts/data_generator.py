@@ -297,6 +297,7 @@ for vid_count in range(start_video, last_video):
             out_alex = out_alex[51:70]
             out_vgg16_bn = out_vgg16_bn[51:70]
             out_ssim = out_ssim[51:70]
+            out_feat_measure = out_feat_measure[51:70]
 
         try:
             assert len(out_feat) == len(out_ssim)
@@ -308,21 +309,38 @@ for vid_count in range(start_video, last_video):
             print(e)
             continue
 
-        final_dict[vid_count][segment] = {
-            'frame pair': [f'frame-({f-1}, {f})' for f in range(1, len(out_feat) + 1)],
-            'Similarity (Human)': gt_feat,
-            'gt cosine similarity': gt_feat_cos,
-            'Similarity (VQA-based)': out_feat,
-            'GPV VQA similarity (old)': out_feat_measure,
-            'GPV VQA cosine similarity': out_feat_cos,
-            "Similarity (Lavis-VQA-based)": lavis_feature,
-            "Lavis VQA cosine similarity": lavis_feature_cos,
-            'resnet-50 feature similarity': out_resnet_50,
-            'Similarity (Feature-based)': out_resnet_152,
-            'alexnet feature similarity': out_alex,
-            'vgg16-bn feature similarity': out_vgg16_bn,
-            'Similarity (Pixel-level)': out_ssim
-        }
+        if vid_count == 10 and segment == 1:
+            final_dict[vid_count][segment] = {
+                'frame pair': [f'frame-({f - 1}, {f})' for f in range(52, 52 + len(out_feat))],
+                'Similarity (Human)': gt_feat,
+                'gt cosine similarity': gt_feat_cos,
+                'Similarity (VQA-based)': out_feat,
+                'GPV VQA similarity (old)': out_feat_measure,
+                'GPV VQA cosine similarity': out_feat_cos,
+                "Similarity (Lavis-VQA-based)": lavis_feature,
+                "Lavis VQA cosine similarity": lavis_feature_cos,
+                'resnet-50 feature similarity': out_resnet_50,
+                'Similarity (Feature-based)': out_resnet_152,
+                'alexnet feature similarity': out_alex,
+                'vgg16-bn feature similarity': out_vgg16_bn,
+                'Similarity (Pixel-level)': out_ssim
+            }
+        else:
+            final_dict[vid_count][segment] = {
+                'frame pair': [f'frame-({f-1}, {f})' for f in range(1, len(out_feat) + 1)],
+                'Similarity (Human)': gt_feat,
+                'gt cosine similarity': gt_feat_cos,
+                'Similarity (VQA-based)': out_feat,
+                'GPV VQA similarity (old)': out_feat_measure,
+                'GPV VQA cosine similarity': out_feat_cos,
+                "Similarity (Lavis-VQA-based)": lavis_feature,
+                "Lavis VQA cosine similarity": lavis_feature_cos,
+                'resnet-50 feature similarity': out_resnet_50,
+                'Similarity (Feature-based)': out_resnet_152,
+                'alexnet feature similarity': out_alex,
+                'vgg16-bn feature similarity': out_vgg16_bn,
+                'Similarity (Pixel-level)': out_ssim
+            }
 
 with open("video_correlation_data.json", 'w') as f:
     f.write(json.dumps(final_dict, indent=4))
