@@ -310,7 +310,7 @@ for vid_count in range(start_video, last_video):
 
         if vid_count == 10 and segment == 1:
             final_dict[vid_count][segment] = {
-                'frame pair': [f'frame-({f - 1}, {f})' for f in range(53, 53 + len(out_feat) + 1)],
+                'frame pair': [f'frame-({f - 1}, {f})' for f in range(53, 53 + len(out_feat))],
                 'Similarity (Human)': gt_feat,
                 'gt cosine similarity': gt_feat_cos,
                 'Similarity (VQA-based)': out_feat,
