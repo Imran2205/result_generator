@@ -28,6 +28,7 @@ parser.add_argument('--lavis_folder', type=str, help='output folder')
 parser.add_argument('--gt_folder', type=str, help='ground truth csv folder')
 parser.add_argument('--video_folder', type=str, help='video folder')
 parser.add_argument('--output_folder', type=str, help='output folder')
+parser.add_argument('--start_video', type=int)
 parser.add_argument('--last_video', type=int)
 
 args = parser.parse_args()
@@ -83,6 +84,7 @@ video_parent_folder = args.video_folder
 output_folder = args.output_folder
 csv = args.csv_file
 last_video = args.last_video + 1
+start_video = args.start_video
 
 df_measure = pd.read_csv(csv)
 df_measure.head()
@@ -99,7 +101,7 @@ os.makedirs(csv_path)
 os.makedirs(csv_t_path)
 
 final_dict = {}
-for vid_count in range(1, last_video):
+for vid_count in range(start_video, last_video):
     parent_video = str(vid_count).zfill(3)
     video_folder = os.path.join(video_parent_folder, f"video_{parent_video}/trimmed_video")
 
