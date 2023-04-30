@@ -207,6 +207,7 @@ for vid_count in range(start_video, last_video):
         drp_row = []
 
         for index, row in df_gt.iterrows():
+            print(row["Object"].lower(), index)
             if row["Object"].lower() in drop_row_list:
                 drp_row.append(index)
 
