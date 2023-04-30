@@ -181,7 +181,7 @@ for vid_count in range(start_video, last_video):
         drp_row = []
 
         for index, row in df.iterrows():
-            if row["Object"].lower() in drop_row_list:
+            if row["Object"].lower() not in drop_row_list:
                 drp_row.append(index)
 
         df = df.drop(index=drp_row)
@@ -193,7 +193,7 @@ for vid_count in range(start_video, last_video):
         drp_row = []
 
         for index, row in df_lavis.iterrows():
-            if row["Object"].lower() in drop_row_list:
+            if row["Object"].lower() not in drop_row_list:
                 drp_row.append(index)
 
         df_lavis = df_lavis.drop(index=drp_row)
@@ -207,8 +207,7 @@ for vid_count in range(start_video, last_video):
         drp_row = []
 
         for index, row in df_gt.iterrows():
-            print(row["Object"].lower(), index)
-            if row["Object"].lower() in drop_row_list:
+            if row["Object"].lower() not in drop_row_list:
                 drp_row.append(index)
 
         df_gt = df_gt.drop(index=drp_row)
