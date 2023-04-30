@@ -86,8 +86,8 @@ csv = args.csv_file
 last_video = args.last_video + 1
 start_video = args.start_video
 
-df_measure = pd.read_csv(csv)
-df_measure.head()
+# df_measure = pd.read_csv(csv)
+# df_measure.head()
 
 if os.path.exists(output_folder):
     shutil.rmtree(output_folder)
@@ -159,15 +159,64 @@ for vid_count in range(start_video, last_video):
         )
 
         df = pd.read_csv(csv_file)
+
+        drop_row_list = [
+            'car',
+            'chair',
+            'curb',
+            'fence',
+            'fire hydrant',
+            'fountain',
+            'gate',
+            'person with a disability',
+            'roadside parking',
+            'sidewalk',
+            'sidewalk pits',
+            'trash on roads',
+            'wet surface',
+            'wheelchair',
+            'white cane',
+        ]
+
+        drp_row = []
+
+        for index, row in df.iterrows():
+            if row["Object"].lower() in drop_row_list:
+                drp_row.append(index)
+
+        df = df.drop(index=drp_row)
+
         df_columns = df.columns[1:]
 
         df_lavis = pd.read_csv(lavis_file)
+
+        drp_row = []
+
+        for index, row in df_lavis.iterrows():
+            if row["Object"].lower() in drop_row_list:
+                drp_row.append(index)
+
+        df_lavis = df_lavis.drop(index=drp_row)
+
         df_lavis_column = df_lavis.columns[1:]
 
         df_gt = pd.read_csv(gt_file)
         df_gt.dropna(how='all', axis=1, inplace=True)
         df_gt.dropna(how='all', axis=0, inplace=True)
+
+        drp_row = []
+
+        for index, row in df_gt.iterrows():
+            if row["Object"].lower() in drop_row_list:
+                drp_row.append(index)
+
+        df_gt = df_gt.drop(index=drp_row)
+
         df_gt_columns = df_gt.columns[1:]
+
+        print(df)
+        print(df_lavis)
+        print(df_gt)
 
         # df_measure_slice = df_measure.loc[(df_measure['video'] == vid_count) & (df_measure['segment'] == segment)]
         # out_feat_measure = list(df_measure_slice['similarity-score'])
