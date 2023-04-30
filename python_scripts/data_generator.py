@@ -102,6 +102,8 @@ os.makedirs(csv_t_path)
 
 final_dict = {}
 for vid_count in range(start_video, last_video):
+    if not vid_count == 3:
+        continue
     parent_video = str(vid_count).zfill(3)
     video_folder = os.path.join(video_parent_folder, f"video_{parent_video}/trimmed_video")
 
@@ -110,6 +112,8 @@ for vid_count in range(start_video, last_video):
 
     for video_name in k_f_folds:
         segment = int(video_name.split('_')[-1].replace('seg', '').replace('.mp4', ''))
+        if not segment == 2:
+            continue
         print(f"Video: {vid_count}, Segment: {segment}")
 
         key_frame_paths = os.path.join(
