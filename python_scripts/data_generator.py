@@ -214,9 +214,9 @@ for vid_count in range(start_video, last_video):
 
         df_gt_columns = df_gt.columns[1:]
 
-        print(df)
-        print(df_lavis)
-        print(df_gt)
+        # print(df)
+        # print(df_lavis)
+        # print(df_gt)
 
         # df_measure_slice = df_measure.loc[(df_measure['video'] == vid_count) & (df_measure['segment'] == segment)]
         # out_feat_measure = list(df_measure_slice['similarity-score'])
