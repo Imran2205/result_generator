@@ -21,6 +21,20 @@ import argparse
 import json
 
 
+"""
+sample command:
+python /kaggle/working/result_generator/python_scripts/data_generator.py \
+    --csv_file /kaggle/input/elene-videos/measures.csv \
+    --gpv_folder /kaggle/input/elene-videos/pred_and_gt_final/gpv_vqa \
+    --lavis_folder /kaggle/input/elene-videos/pred_and_gt_final/lavis_vqa \
+    --gt_folder /kaggle/input/elene-videos/pred_and_gt_final/gt_vqa_csv \
+    --video_folder /kaggle/input/elene-videos/accss_videos_elena/accss_videos_elena/ \
+    --output_folder /kaggle/working/output \
+    --start_video 1 \
+    --last_video 21
+"""
+
+
 parser = argparse.ArgumentParser(description='Data generator')
 parser.add_argument('--csv_file', type=str, help='csv file')
 parser.add_argument('--gpv_folder', type=str, help='csv folder')
